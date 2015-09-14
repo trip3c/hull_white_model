@@ -1,0 +1,33 @@
+#include <iostream>
+#include <fstream>
+#include <sstream>
+using namespace std;
+
+int main()
+{
+    double vol_swaption[10][10];
+    ifstream file("/Users/james/Documents/AFP_vol.csv");
+
+    for(int i = 0; i < 9; ++i)
+    {
+        string line;
+        getline(file, line);
+        if ( !file.good() )
+            break;
+
+        stringstream stream(line);
+
+        for (int j = 0; j < 9; ++j)
+        {
+            string data;
+            getline(stream, data, ',');
+            if ( !stream.good() )
+                break;
+
+            stringstream string_to_double(data);
+            string_to_double >> vol_swaption[i][j];
+            cout<< vol_swaption[i][j]<<" ";
+        }
+    }
+    return 0;
+}
